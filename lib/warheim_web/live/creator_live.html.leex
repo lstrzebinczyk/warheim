@@ -1,0 +1,11 @@
+<div>
+  Hello world!
+
+  <%= f = form_for :band, "", [phx_change: "band-selected", phx_submit: :save] %>
+    <%= select f, :selected_band, all_bands_for_select(), prompt: "", value: @state.selected_band %>
+  </form>
+
+  <div>
+    <%= @state[:selected_band] %>
+  </div>
+</div>
