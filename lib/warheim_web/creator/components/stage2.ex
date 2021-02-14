@@ -18,10 +18,12 @@ defmodule Creator.Components.Stage2 do
     <div class="row">
       <div class="col-4">
         <h2><%= band_type_name(@state) %></h2>
-        <div>Natura: <%= band_alignment_name(@state) %></div>
+        <div>
+          Natura: <%= band_alignment_name(@state) %>
+        </div>
         <br>
         <div>
-          <div>Specjalne zasady: </div>
+          <div>Zasady Specjalne: </div>
           <%= for special_rule <- special_rules(@state) do %>
             <div style="margin-left: 10px;">
               <%= special_rule.name %>
@@ -35,6 +37,10 @@ defmodule Creator.Components.Stage2 do
               </i>
             </div>
           <% end %>
+        </div>
+        <br>
+        <div>
+          Rozmiar bandy: <%= band_size(@state) %> modeli
         </div>
       </div>
       <div class="col">
@@ -51,6 +57,11 @@ defmodule Creator.Components.Stage2 do
 
   defp band_type_name(%Creator.State{band_type_id: band_type_id}) do
     band(band_type_id).name
+  end
+
+  defp band_size(%Creator.State{band_type_id: band_type_id}) do
+    min..max = band(band_type_id).band_size
+    "#{min} - #{max}"
   end
 
   defp band_alignment_name(%Creator.State{band_type_id: band_type_id}) do
