@@ -7,17 +7,21 @@ defmodule Creator.Components.Stage1 do
 
   def render(assigns) do
     ~L"""
-    <%= f = form_for :state, "", [phx_submit: :set_band_type_id] %>
+    <%= f = form_for :state, "", [phx_submit: :submit_state_1] %>
       <div>
         Stwórz nową bandę
       </div>
+      <% # Note %>
+      <% # This should have a prompt in the final thing, but for ease of dev, pre-selecting the first option is :ok: %>
       <div>
         <%= label f, :band_type_id, "Typ Bandy" %>
-        <%= select f, :band_type_id, all_bands_for_select(), prompt: "", value: @state.band_type_id %>
+        <%= # select f, :band_type_id, all_bands_for_select(), prompt: "", value: @state.band_type_id %>
+        <%= select f, :band_type_id, all_bands_for_select(), value: @state.band_type_id %>
       </div>
       <div>
         <%= label f, :creator_mode, "Tryb Kreatora" %>
-        <%= select f, :creator_mode, creator_modes(), prompt: "", value: @state.creator_mode %>
+        <%= # select f, :creator_mode, creator_modes(), prompt: "", value: @state.creator_mode %>
+        <%= select f, :creator_mode, creator_modes(), value: @state.creator_mode %>
       </div>
       <div>
         <%= submit "ok!" %>

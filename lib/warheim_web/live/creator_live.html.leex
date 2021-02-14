@@ -3,6 +3,6 @@
     <%= live_component @socket, Creator.Components.Stage1, id: :stage1, state: @state %>
   <% end %>
   <%= if @state.stage == 2 do %>
-    Stage two yo
+    <%= live_component @socket, Creator.Components.Stage2, id: :stage2, state: @state %>
   <% end %>
 </div>

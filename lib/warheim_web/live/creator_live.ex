@@ -10,7 +10,7 @@ defmodule WarheimWeb.CreatorLive do
   # set_band_type_id
 
   def handle_event(
-    "set_band_type_id",
+    "submit_state_1",
     %{
       "state" =>
       %{
