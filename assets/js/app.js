@@ -18,12 +18,10 @@ import NProgress from "nprogress"
 import {LiveSocket} from "phoenix_live_view"
 
 function runTheTooltips() {
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    console.log(tooltipTriggerEl)
-    const tt =  new bootstrap.Tooltip(tooltipTriggerEl, {html: true})
-    console.log(tt)
-  })
+  const tooltipTriggerElements = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  for (const element of tooltipTriggerElements) {
+    new bootstrap.Tooltip(element)
+  }
 }
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")

@@ -30,7 +30,7 @@ defmodule Creator.Components.Stage2 do
                 data-bs-toggle="tooltip"
                 data-bs-html="true"
                 data-bs-placement="right"
-                title="<%= special_rule.description %>"
+                title="<%= to_html(special_rule.description) %>"
                 >
               </i>
             </div>
@@ -42,6 +42,11 @@ defmodule Creator.Components.Stage2 do
       </div>
     </div>
     """
+  end
+
+  defp to_html(markdown_text) do
+    {:ok, html_doc, _deprecation_messages} = Earmark.as_html(markdown_text)
+    html_doc
   end
 
   defp band_type_name(%Creator.State{band_type_id: band_type_id}) do
