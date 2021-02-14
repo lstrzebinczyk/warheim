@@ -5,7 +5,8 @@ defmodule Creator.Components.Stage2 do
     socket =
       socket
         |> assign(:state, state)
-        |> assign(:is_new_unit_modal_opened, false)
+        # |> assign(:is_new_unit_modal_opened, false)
+        |> assign(:is_new_unit_modal_opened, true)
 
     {:ok, socket}
   end
@@ -61,15 +62,16 @@ defmodule Creator.Components.Stage2 do
           Dodaj jednostkę
         </button>
       </div>
-
-        <%= @is_new_unit_modal_opened %>
-
         <%= if @is_new_unit_modal_opened do %>
           <div class="x-modal-background" phx-target="<%= @myself %>" phx-click="close-new-unit-modal"></div>
           <div class="x-modal">
             <div class="x-modal-content">
               <span class="close" phx-target="<%= @myself %>" phx-click="close-new-unit-modal">&times;</span>
-              <p>Some text in the Modal..</p>
+              <p>
+                <%= for unit_type <- Warheim.Rules.UnitType.all() do %>
+                  <div><%= unit_type.name %></div>
+                <% end %>
+              </p>
             </div>
           </div>
         <% end %>

@@ -14,7 +14,8 @@ defmodule Warheim.Rules.Race do
           initiative: 6,
           attacks: 4,
           leadership: 7
-        }
+        },
+        special_rules: ["they_smell_weird"]
       }
     end
   end

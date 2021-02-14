@@ -6,6 +6,7 @@ defmodule Warheim.Rules.Band.GoblinPirates do
       alignment_id: "evil",
       special_rule_ids: ["tax", "wasteful"],
       band_size: 3..15,
+      inventory_types: ["hero", "henchmen", "heavy_weapon", "privateer"],
       unit_templates: [
         captain_template()
       ]
@@ -17,6 +18,7 @@ defmodule Warheim.Rules.Band.GoblinPirates do
       name: "Kapitan Goblinów",
       race: "goblin",
       unit_type: "hero",
+      inventory_type: "hero",
       cost: 50,
       starting_exp: 20,
       count: 1..1,
@@ -34,7 +36,7 @@ defmodule Warheim.Rules.Band.GoblinPirates do
         leadership: 7
       },
       inventory: ["knife", "pistol"],
-      special_rules: ["leader", "they_smell_weird"]
+      special_rules: ["leader"]
     }
   end
 end
