@@ -18,6 +18,7 @@ defmodule Warheim.Rules.Band.GoblinPirates do
       race: "goblin",
       unit_type: "hero",
       cost: 50,
+      starting_exp: 20,
       count: 1..1,
       availability: nil,
       base: "20x20",

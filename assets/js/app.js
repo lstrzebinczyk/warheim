@@ -24,14 +24,23 @@ function runTheTooltips() {
   }
 }
 
+function runTheModal() {
+  const element = document.querySelector('.modal');
+  if (element) {
+    new bootstrap.Modal(element)
+  }
+}
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
 
 // Show progress bar on live navigation and form submits
 window.addEventListener("phx:page-loading-start", info => NProgress.start())
 window.addEventListener("phx:page-loading-stop", info => {
+  console.log("loading stop")
   NProgress.done()
   runTheTooltips()
+  runTheModal();
 })
 
 // connect if there are any LiveViews on the page
