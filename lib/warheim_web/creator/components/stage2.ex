@@ -41,13 +41,10 @@ defmodule Creator.Components.Stage2 do
           <%= for special_rule <- special_rules(@state) do %>
             <div style="margin-left: 10px;">
               <%= special_rule.name %>
-              <i
-                class="bi bi-info-circle"
-                data-bs-toggle="tooltip"
-                data-bs-html="true"
-                data-bs-placement="right"
-                title="<%= to_html(special_rule.description) %>"
-                >
+              <i class="bi bi-info-circle x-tooltip">
+                <span class="x-tooltip-text">
+                  <%= raw to_html(special_rule.description) %>
+                </span>
               </i>
             </div>
           <% end %>
