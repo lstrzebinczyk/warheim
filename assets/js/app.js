@@ -17,12 +17,24 @@ import {Socket} from "phoenix"
 import NProgress from "nprogress"
 import {LiveSocket} from "phoenix_live_view"
 
+function runTheTooltips() {
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    console.log(tooltipTriggerEl)
+    const tt =  new bootstrap.Tooltip(tooltipTriggerEl, {html: true})
+    console.log(tt)
+  })
+}
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
 
 // Show progress bar on live navigation and form submits
 window.addEventListener("phx:page-loading-start", info => NProgress.start())
-window.addEventListener("phx:page-loading-stop", info => NProgress.done())
+window.addEventListener("phx:page-loading-stop", info => {
+  NProgress.done()
+  runTheTooltips()
+})
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()
@@ -32,4 +44,5 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
+
 

@@ -1,4 +1,9 @@
 defmodule Warheim.Rules.SpecialRule do
+  def find(special_rule_id) do
+    all()
+    |> Enum.find(nil, fn special_rule -> special_rule.id == special_rule_id end)
+  end
+
   def all do
     [
       %{

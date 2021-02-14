@@ -19,6 +19,23 @@ defmodule Creator.Components.Stage2 do
       <div class="col-4">
         <h2><%= band_type_name(@state) %></h2>
         <div>Natura: <%= band_alignment_name(@state) %></div>
+        <br>
+        <div>
+          <div>Specjalne zasady: </div>
+          <%= for special_rule <- special_rules(@state) do %>
+            <div style="margin-left: 10px;">
+              <%= special_rule.name %>
+              <i
+                class="bi bi-info-circle"
+                data-bs-toggle="tooltip"
+                data-bs-html="true"
+                data-bs-placement="right"
+                title="<%= special_rule.description %>"
+                >
+              </i>
+            </div>
+          <% end %>
+        </div>
       </div>
       <div class="col">
         main page
@@ -34,6 +51,13 @@ defmodule Creator.Components.Stage2 do
   defp band_alignment_name(%Creator.State{band_type_id: band_type_id}) do
     alignment_id = band(band_type_id).alignment_id
     Warheim.Rules.Alignment.find(alignment_id).name
+  end
+
+  defp special_rules(%Creator.State{band_type_id: band_type_id}) do
+    band(band_type_id).special_rule_ids
+    |> Enum.map(fn special_rule_id ->
+      Warheim.Rules.SpecialRule.find(special_rule_id)
+    end)
   end
 
   defp band(band_type_id) do

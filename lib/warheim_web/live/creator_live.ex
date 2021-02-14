@@ -2,7 +2,12 @@ defmodule WarheimWeb.CreatorLive do
   use WarheimWeb, :live_view
 
   def mount(_params, _session, socket) do
-    state = %Creator.State{}
+    # state = %Creator.State{}
+    state = %Creator.State{
+      stage: 2,
+      band_type_id: "goblin_pirates",
+      creator_mode: "import"
+    }
 
     {:ok, assign(socket, state: state)}
   end
