@@ -1,11 +1,8 @@
 <div>
-  Hello world!
-
-  <%= f = form_for :band, "", [phx_change: "band-selected", phx_submit: :save] %>
-    <%= select f, :selected_band, all_bands_for_select(), prompt: "", value: @state.selected_band %>
-  </form>
-
-  <div>
-    <%= @state[:selected_band] %>
-  </div>
+  <%= if @state.stage == 1 do %>
+    <%= live_component @socket, Creator.Components.Stage1, id: :stage1, state: @state %>
+  <% end %>
+  <%= if @state.stage == 2 do %>
+    Stage two yo
+  <% end %>
 </div>

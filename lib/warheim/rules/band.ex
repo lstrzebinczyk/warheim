@@ -1,7 +1,7 @@
 defmodule Warheim.Rules.Band do
   def all do
     [
-      Warheim.Rules.Band.DwarfBrewmasters
+      Warheim.Rules.Band.GoblinPirates
     ]
   end
 end
