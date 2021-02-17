@@ -1,10 +1,6 @@
 defmodule Creator.Components.Stage1 do
   use WarheimWeb, :live_component
 
-  def mount(_params, _session, socket) do
-    {:ok, socket}
-  end
-
   def render(assigns) do
     ~L"""
     <%= f = form_for :state, "", [phx_submit: :submit_state_1] %>
