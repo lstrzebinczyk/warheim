@@ -1,12 +1,13 @@
 defmodule Creator.Components.InfoWithTooltip do
-  use WarheimWeb, :live_component
+  use Surface.Component
 
-  # Accepts a single tooltip param
+  prop tooltip, :string, required: true
+
   def render(assigns) do
-    ~L"""
+    ~H"""
       <i class="bi bi-info-circle x-tooltip">
         <span class="x-tooltip-text">
-          <%= raw to_html(@tooltip) %>
+          {{ raw to_html(@tooltip) }}
         </span>
       </i>
     """

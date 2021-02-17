@@ -1,5 +1,8 @@
 defmodule Creator.Components.BandDetails do
-  use WarheimWeb, :live_component
+  use Surface.Component
+
+  prop band_type_id, :string, required: true
+  data band, :any
 
   def update(%{band_type_id: band_type_id}, socket) do
     band = Warheim.Rules.Band.find(band_type_id)
@@ -13,25 +16,23 @@ defmodule Creator.Components.BandDetails do
 
   # Accepts a single tooltip param
   def render(assigns) do
-    ~L"""
+    ~H"""
       <div>
-        <h2><%= @band.name %></h2>
+        <h2>{{ @band.name }}</h2>
         <div>
-          Natura: <%= band_alignment_name(@band) %>
+          Natura: {{ band_alignment_name(@band) }}
         </div>
         <br>
         <div>
           <div>Zasady Specjalne: </div>
-          <%= for special_rule <- special_rules(@band) do %>
-            <div style="margin-left: 10px;">
-              <%= special_rule.name %>
-              <%= live_component @socket, Creator.Components.InfoWithTooltip, tooltip: special_rule.description %>
+            <div style="margin-left: 10px;" :for={{ special_rule <- special_rules(@band) }}>
+              {{ special_rule.name }}
+              <Creator.Components.InfoWithTooltip tooltip={{special_rule.description}} />
             </div>
-          <% end %>
         </div>
         <br>
         <div>
-          Rozmiar bandy: <%= band_size(@band) %> modeli
+          Rozmiar bandy: {{ band_size(@band) }} modeli
         </div>
       </div>
     """
