@@ -1,10 +1,11 @@
 defmodule Creator.Components.Stage2 do
   use Surface.LiveComponent
 
-  alias Surface.Components.Form.Field
+  alias Creator.Components.SpecialRule
 
   prop state, :any
-  data is_new_unit_modal_opened, :boolean, default: false
+  # data is_new_unit_modal_opened, :boolean, default: false
+  data is_new_unit_modal_opened, :boolean, default: true
   data unit_type_index_selected, :integer, default: 0
 
   def render(assigns) do
@@ -37,7 +38,47 @@ defmodule Creator.Components.Stage2 do
                       </div>
                     </div>
                     <div class="col">
-                      {{ unit_types() |> Enum.at(@unit_type_index_selected) |> Map.get(:name) }}
+                      <div :for={{ unit_template <- unit_templates(@state.band_type_id, @unit_type_index_selected) }}>
+                        <div>{{unit_template.name}}</div>
+                        <div>Koszt: {{unit_template.cost}} ZK </div>
+                        <div>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>SZ</th>
+                                <th>WW</th>
+                                <th>US</th>
+                                <th>S</th>
+                                <th>Wt</th>
+                                <th>Żw</th>
+                                <th>I</th>
+                                <th>A</th>
+                                <th>CP</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>{{ unit_template.initial_chars.movement }}</td>
+                                <td>{{ unit_template.initial_chars.weapon_skill }}</td>
+                                <td>{{ unit_template.initial_chars.balistic_skill }}</td>
+                                <td>{{ unit_template.initial_chars.strength }}</td>
+                                <td>{{ unit_template.initial_chars.toughness }}</td>
+                                <td>{{ unit_template.initial_chars.wounds }}</td>
+                                <td>{{ unit_template.initial_chars.initiative }}</td>
+                                <td>{{ unit_template.initial_chars.attacks }}</td>
+                                <td>{{ unit_template.initial_chars.leadership }}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div>
+                          <div>Zasady Specjalne: </div>
+                          <div style="margin-left: 10px;" :for={{ special_rule_id <- special_rules_for(unit_template) }}>
+                            <SpecialRule special_rule_id={{special_rule_id}} />
+                          </div>
+                        </div>
+
+                      </div>
                     </div>
                   </div>
                 </p>
@@ -47,6 +88,19 @@ defmodule Creator.Components.Stage2 do
         </div>
       </div>
     """
+  end
+
+  def special_rules_for(unit_template) do
+    race = Warheim.Rules.Race.find(unit_template.race_id)
+    race.special_rules ++ unit_template.special_rules
+  end
+
+  def unit_templates(band_type_id, unit_type_index_selected) do
+    band_type = Warheim.Rules.Band.find(band_type_id)
+    selected_unit_type = Warheim.Rules.UnitType.all() |> Enum.at(unit_type_index_selected)
+
+    band_type.unit_templates
+      |> Enum.filter(fn unit_type -> unit_type.unit_type == selected_unit_type.id end)
   end
 
   def unit_types do

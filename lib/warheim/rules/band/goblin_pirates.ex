@@ -16,7 +16,7 @@ defmodule Warheim.Rules.Band.GoblinPirates do
   defp captain_template do
     %{
       name: "Kapitan Goblinów",
-      race: "goblin",
+      race_id: "goblin",
       unit_type: "hero",
       inventory_type: "hero",
       cost: 50,

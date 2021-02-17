@@ -25,4 +25,9 @@ defmodule Warheim.Rules.Race do
       Warheim.Rules.Race.Goblin.data()
     ]
   end
+
+  def find(race_id) do
+    all()
+    |> Enum.find(nil, fn race -> race.id == race_id end)
+  end
 end

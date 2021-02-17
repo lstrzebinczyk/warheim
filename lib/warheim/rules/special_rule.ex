@@ -28,6 +28,23 @@ defmodule Warheim.Rules.SpecialRule do
           zasad sprzedaży *łupów* kompania traktowana jest tak, jakby licza modeli w *drużynie* była o jeden poziom większa,
           niż to faktycznie ma miejsce.
         """
+      },
+      %{
+        id: "they_smell_weird",
+        name: "Dziwnie cuchnom",
+        description: """
+          *Zielonoskórzy* nie lubią walczyć z *Elfami*. *Elfowie* są wyyniośli, nienaturalni i *dziwnie cuchnom*, co wywołuje obawę w tchórzliwej rasie.
+          Wszyscy *Elfowie* budzą STRACH w modelu podlegającym *zasadzie specjalnej* DZIWNIE CUCHNOM.
+        """
+      },
+      %{
+        id: "leader",
+        name: "Dowódca",
+        description: """
+          Model *bohatera* lub *stronnika*, który znajduje się w odległości nieprzekraczającej **6"** od sprzymierzonego modelu podlegającego specjalnej zasadzie DOWÓDCA,
+          może użyć jako podstawę testu wartości współczynnika **CECHY PRZYWÓDCZE** swojego DOWÓDCY. Należy pamiętać, że zasada ta nie ma zastosowania w przypadku, gdy
+          DOWÓDCA jest *Oszołomiony!*, został *Powalony na ziemię!* lub *Ucieka!*
+        """
       }
     ]
   end

@@ -1,6 +1,8 @@
 defmodule Creator.Components.BandDetails do
   use Surface.Component
 
+  alias Creator.Components.SpecialRule
+
   prop band_type_id, :string, required: true
   data band, :any
 
@@ -25,10 +27,9 @@ defmodule Creator.Components.BandDetails do
         <br>
         <div>
           <div>Zasady Specjalne: </div>
-            <div style="margin-left: 10px;" :for={{ special_rule <- special_rules(@band) }}>
-              {{ special_rule.name }}
-              <Creator.Components.InfoWithTooltip tooltip={{special_rule.description}} />
-            </div>
+          <div style="margin-left: 10px;" :for={{ special_rule_id <- @band.special_rule_ids }}>
+            <SpecialRule special_rule_id={{special_rule_id}} />
+          </div>
         </div>
         <br>
         <div>
@@ -45,12 +46,5 @@ defmodule Creator.Components.BandDetails do
 
   defp band_alignment_name(band) do
     Warheim.Rules.Alignment.find(band.alignment_id).name
-  end
-
-  defp special_rules(band) do
-    band.special_rule_ids
-    |> Enum.map(fn special_rule_id ->
-      Warheim.Rules.SpecialRule.find(special_rule_id)
-    end)
   end
 end
