@@ -77,6 +77,12 @@ defmodule Creator.Components.Stage2 do
                             <SpecialRule special_rule_id={{special_rule_id}} />
                           </div>
                         </div>
+                        <div>
+                          <div>Ekwipunek / Pancerz: </div>
+                          <div style="margin-left: 10px;" :for={{ item_id <- unit_template.inventory }}>
+                            {{item_id}}
+                          </div>
+                        </div>
 
                       </div>
                     </div>
