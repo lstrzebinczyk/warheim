@@ -1,26 +1,34 @@
 defmodule Creator.Components.Stage1 do
-  use WarheimWeb, :live_component
+  use Surface.Component
+
+  alias Surface.Components.Form
+  alias Surface.Components.Form.Field
+  alias Surface.Components.Form.Label
+  alias Surface.Components.Form.Select
+  alias Surface.Components.Form.Submit
+
+  prop state, :any, required: true
 
   def render(assigns) do
-    ~L"""
-    <%= f = form_for :state, "", [phx_submit: :submit_state_1] %>
-      <div>
-        Stwórz nową bandę
-      </div>
-      <% # Note %>
-      <% # This should have a prompt in the final thing, but for ease of dev, pre-selecting the first option is :ok: %>
-      <div>
-        <%= label f, :band_type_id, "Typ Bandy" %>
-        <%= select f, :band_type_id, all_bands_for_select(), prompt: "", value: @state.band_type_id %>
-      </div>
-      <div>
-        <%= label f, :creator_mode, "Tryb Kreatora" %>
-        <%= select f, :creator_mode, creator_modes(), prompt: "", value: @state.creator_mode %>
-      </div>
-      <div>
-        <%= submit "ok!" %>
-      </div>
-    </form>
+    ~H"""
+      <Form for={{ :state }} submit="submit_state_1">
+        <div>
+          Stwórz nową bandę
+        </div>
+        <Field name="band_type_id">
+          <Label/>
+          <div class="control">
+            <Select options={{ all_bands_for_select() }} opts={{ prompt: ""}} />
+          </div>
+        </Field>
+        <Field name="creator_mode">
+          <Label/>
+          <div class="control">
+            <Select options={{ creator_modes() }} opts={{ prompt: ""}} />
+          </div>
+         </Field>
+         <Submit label="ok!" class="button" />
+      </Form>
     """
   end
 
