@@ -1,10 +1,14 @@
 <div class="row">
   <div class="col-2">
-    <%= for special_rule <- all_special_rules do %>
-      <div>
-        <%= live_patch special_rule.name, to: Routes.special_rules_path(@socket, :show, special_rule.id) %>
-      </div>
-    <% end %>
+    <div class="list-group">
+      <%= for special_rule <- all_special_rules do %>
+        <%= if special_rule.id == assigns[:id] do %>
+          <%= live_patch special_rule.name, to: Routes.special_rules_path(@socket, :show, special_rule.id), class: "list-group-item list-group-item-action active" %>
+        <% else %>
+          <%= live_patch special_rule.name, to: Routes.special_rules_path(@socket, :show, special_rule.id), class: "list-group-item list-group-item-action" %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
   <div class="col-10">
     <%= if assigns[:special_rule] do %>
