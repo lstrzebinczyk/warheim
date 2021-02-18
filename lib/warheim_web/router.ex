@@ -19,6 +19,8 @@ defmodule WarheimWeb.Router do
 
     live "/", PageLive, :index
     live "/creator", CreatorLive, :index
+    live "/special_rules", SpecialRulesLive, :index
+    live "/special_rules/:id", SpecialRulesLive, :show
   end
 
   # Other scopes may use custom stacks.
