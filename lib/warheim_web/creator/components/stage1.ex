@@ -12,22 +12,22 @@ defmodule Creator.Components.Stage1 do
   def render(assigns) do
     ~H"""
       <Form for={{ :state }} submit="submit_state_1">
-        <div>
+        <h1>
           Stwórz nową bandę
-        </div>
-        <Field name="band_type_id">
+        </h1>
+        <Field name="band_type_id" class="form-group">
           <Label/>
           <div class="control">
-            <Select options={{ all_bands_for_select() }} opts={{ prompt: ""}} />
+            <Select options={{ all_bands_for_select() }} opts={{ prompt: ""}} class="form-control"/>
           </div>
         </Field>
-        <Field name="creator_mode">
+        <Field name="creator_mode" class="form-group">
           <Label/>
           <div class="control">
-            <Select options={{ creator_modes() }} opts={{ prompt: ""}} />
+            <Select options={{ creator_modes() }} opts={{ prompt: ""}} class="form-control"/>
           </div>
          </Field>
-         <Submit label="ok!" class="button" />
+         <Submit label="ok" class="btn btn-primary mt-3" />
       </Form>
     """
   end

@@ -25,12 +25,13 @@ defmodule Creator.Components.Stage2 do
                 <span class="close" :on-click="close-new-unit-modal">&times;</span>
                 <p>
                   <div class="row">
-                    <div class="col-4">
-                      <div :for.with_index={{ {unit_type, i} <- unit_types() }}>
+                    <div class="col-3">
+                      <div class="list-group">
                         <button
+                          :for.with_index={{ {unit_type, i} <- unit_types() }}
                           :on-click="select-unit-type-id"
                           type="button"
-                          class={{"btn", "btn-primary", active: i == @unit_type_index_selected }}
+                          class={{"list-group-item", "list-group-item-action", active: i == @unit_type_index_selected }}
                           value={{i}}
                         >
                           {{ unit_type.name }}
@@ -39,21 +40,27 @@ defmodule Creator.Components.Stage2 do
                     </div>
                     <div class="col">
                       <div :for={{ unit_template <- unit_templates(@state.band_type_id, @unit_type_index_selected) }}>
-                        <div>{{unit_template.name}}</div>
-                        <div>Koszt: {{unit_template.cost}} ZK </div>
                         <div>
-                          <table class="table">
+                          <h4>{{unit_template.name}}</h4>
+                        </div>
+                        <div><strong>Liczba modeli:</strong> {{unit_count(unit_template.count)}} </div>
+                        <div><strong>Koszt:</strong> {{unit_template.cost}} ZK </div>
+                        <div><strong>Dostępność:</strong> {{unit_template.availability || "Nie Dotyczy"}}</div>
+                        <div><strong>Podstawka:</strong> {{unit_template.base}}</div>
+
+                        <div>
+                          <table class="table table-sm">
                             <thead>
                               <tr>
-                                <th>SZ</th>
-                                <th>WW</th>
-                                <th>US</th>
-                                <th>S</th>
-                                <th>Wt</th>
-                                <th>Żw</th>
-                                <th>I</th>
-                                <th>A</th>
-                                <th>CP</th>
+                                <th width="11.11%" scope="col">SZ</th>
+                                <th width="11.11%" scope="col">WW</th>
+                                <th width="11.11%" scope="col">US</th>
+                                <th width="11.11%" scope="col">S</th>
+                                <th width="11.11%" scope="col">Wt</th>
+                                <th width="11.11%" scope="col">Żw</th>
+                                <th width="11.11%" scope="col">I</th>
+                                <th width="11.11%" scope="col">A</th>
+                                <th width="11.11%" scope="col">CP</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -111,6 +118,14 @@ defmodule Creator.Components.Stage2 do
 
   def unit_types do
     Warheim.Rules.UnitType.all()
+  end
+
+  def unit_count(min..max) do
+    if min == max do
+      "#{min}"
+    else
+      "#{min} - #{max}"
+    end
   end
 
   def handle_event("open-new-unit-modal", _, socket) do

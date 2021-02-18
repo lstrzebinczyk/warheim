@@ -20,9 +20,12 @@ defmodule Creator.Components.BandDetails do
   def render(assigns) do
     ~H"""
       <div>
-        <h2>{{ @band.name }}</h2>
+        <h3>{{ @band.name }}</h3>
         <div>
-          Natura: {{ band_alignment_name(@band) }}
+          <div>Natura: </div>
+          <div style="margin-left: 10px;">
+            {{ band_alignment_name(@band) }}
+          </div>
         </div>
         <br>
         <div>
@@ -33,7 +36,10 @@ defmodule Creator.Components.BandDetails do
         </div>
         <br>
         <div>
-          Rozmiar bandy: {{ band_size(@band) }} modeli
+          <div>Rozmiar bandy: </div>
+          <div style="margin-left: 10px;">
+            {{ band_size(@band) }} modeli
+          </div>
         </div>
       </div>
     """
