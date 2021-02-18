@@ -7,9 +7,11 @@
     <% end %>
   </div>
   <div class="col-10">
-    <h1><%= @special_rule.name %></h1>
-    <p>
-      <%= raw to_html(@special_rule.description) %>
-    </p>
+    <%= if assigns[:special_rule] do %>
+      <h1><%= @special_rule.name %></h1>
+      <p>
+        <%= raw to_html(@special_rule.description) %>
+      </p>
+    <% end %>
   </div>
 </div>
